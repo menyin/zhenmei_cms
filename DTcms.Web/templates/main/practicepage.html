@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="<%templateskin%>/css/practiceCss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="header">
+        <div class="headerC">
+            <div class="headerC_Left">
+                <img src="../../templates/main/images/logo.png" />
+                <ul>
+                    <li><a href="#">资讯</a></li>
+                    <li><a href="#">商城</a></li>
+                    <li><a href="#">视频</a></li>
+                    <li><a href="#">图片</a></li>
+                    <li><a href="#">下载</a></li>
+                </ul>
+                <span class="search">
+                    <input type="text" class="searchT" placeholder="输入回车搜索" />
+                    <input type="button" class="searchB" />
+                </span>
+            </div>
+            <div class="headerC_Right">
+                <span><a href="#">登录</a>｜ <a href="#">注册</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <a href="#">购物车0件</a> &nbsp&nbsp <a href="#">联系我们</a> </span>
+            </div>
+        </div>
+    </div>
+    <%set DataTable dt0=get_category_list(channel,0) %>
+    <%foreach(DataRow dr0 in dt0.Rows) %>
+    <div class="category">
+        <div class="categoryT"><!--类目头名称-->
+            <h2>
+                <a>{dr0[title]}</a>&nbsp&nbsp&nbsp&nbsp>&nbsp&nbsp&nbsp&nbsp
+            </h2>
+            <p>                                           
+            <%set DataTable dt1=get_category_list(channel,{strtoint({dr0[id]})})  %>
+           <%for(int i=0;i<dt1.Rows.Count;i++)%>
+           <%set DataRow dr1=dt1.Rows[i] %>
+            <a>{dr1[title]}</a>
+               <%if(i<dt1.Rows.Count-1)%>
+               &nbsp&nbsp&nbsp｜&nbsp&nbsp&nbsp
+               <%/if%>
+           <%/for%>
+
+            </p>
+        </div>
+        <div class="categoryL"><!--左边列表明细-->
+            <ul>
+            <%set DataTable dt2=get_article_list(channel,{strtoint({dr0[id]})},4,"status=0 and img_url!=''") %>
+            <%foreach(DataRow dr2 in dt2.Rows) %>
+            <li><a href="<%linkurl("news_show",{dr2[id]})%>">
+                    <img alt="图片" src="{dr2[img_url]}" /></a>
+                    <h3>
+                        <a href="<%linkurl("news_show",{dr2[id]})%>">{dr2[title]}</a></h3>
+                    <p>
+                        {dr2[zhaiyao]}</p>
+                    <i>{dr2[add_time]}</i> </li>
+            <%/foreach%>
+            </ul>
+        </div>
+        <div class="categoryR"><!--右边列表明细-->
+            <ul>
+              <%for(int i=0;i<dt2.Rows.Count;i++)%>
+           <%set DataRow dr2=dt2.Rows[i] %>
+             <li><i>{i+1}</i> <a href="<%linkurl("news_show",{dr2[id]})%>"><%cutstring({dr2[zhaiyao]},16)%>...</a> <span><%datetostr({dr2[add_time]},MM-dd)%></span> </li>
+           <%/for%>
+            <!-- <%foreach(DataRow dr2 in dt2.Rows) %>
+                <li><i>8</i> <a>美国人怎么看 Apple ...</a> <span>11-09</span> </li>
+            <%/foreach%>-->
+
+            </ul>
+        </div>
+    </div>
+    <div style="clear: both;">
+    </div>
+    <%/foreach%>
+    <div class="footer">
+        <div class="footerC">
+            <p>
+                <a href="#">首 页</a>｜ <a href="#">关于我们</a>｜ <a href="#">新闻资讯</a>｜ <a href="#">购物商城</a>｜
+                <a href="#">视频专区</a>｜ <a href="#">资源下载</a>｜ <a href="#">图片分享</a>｜ <a href="#">留言反馈</a>｜
+                <a href="#">友情链接</a>
+            </p>
+            <p>
+            版权所有 深圳市动力启航软件有限公司 粤ICP备11064298号 DTcms版本号：4.0.0
+            </p>
+            <p>
+          Copyright © 2009-2015 dtcms.net Corporation,All Rights Reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

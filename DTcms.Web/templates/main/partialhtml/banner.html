@@ -1,0 +1,18 @@
+﻿<div class="banner" style="width: 908px;height: 320px;margin:0 auto;text-align: center;">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <%set List<DTcms.Model.article_albums> banners=get_article_colval< List<DTcms.Model.article_albums>
+    >("banner","albums")%>
+    <%foreach(var banner in banners)%>
+    <div class="swiper-slide">
+        <img src="{banner.original_path}" alt="img" style="width: 100%;" />
+        <h2>{banner.remark}</h2>
+    </div>
+    <%/foreach%>
+</div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <img class="banner_bg" src="<%templateskin%>/images/banner_bg.png" alt="" />
+</div>
+<br />

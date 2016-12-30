@@ -1,0 +1,93 @@
+﻿<div class="header">
+    <div class="logo">
+<!--        <a href="index.html"><img src="<%templateskin%>/images/imgs/titlelogo.png" alt="" /></a>-->>
+        <a href="index.html"><img src="<%=get_article_colval<List<DTcms.Model.article_albums>>("headerlogo","albums")[0].original_path%>" alt="" /></a>
+
+    </div>
+    <div class="nav">
+        <ul class="nav_ul">
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("index")%>">
+                    首页
+                </a>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("about")%>">
+                    关于我们
+                </a>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("goods_list",0,1)%>">
+                    产品中心
+                </a>
+                <div class="nav_tip">
+                    <%set DataTable categorygoods=get_category_list("goods",0)%>
+                    <%foreach(DataRow dr in categorygoods.Rows)%>
+                    <a target="_self" class="" href="<%linkurl("goods_list",dr["id"],1)%>">{dr[title]}</a>
+                    <%/foreach%>
+                </div>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("business")%>">
+                    业务范围
+                </a>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("news_list")%>">
+                    新闻中心
+                </a>
+                <div class="nav_tip">
+                    <%set DataTable categorynews=get_category_list("news",0)%>
+                    <%foreach(DataRow dr in categorynews.Rows)%>
+                    <a target="_self" class="" href="<%linkurl("news_list",dr["id"],1)%>">{dr[title]}</a>
+                    <%/foreach%>
+                </div>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("questions_list")%>">
+                    问题解答
+                </a>
+                <div class="nav_tip">
+                    <%set DataTable categoryqs=get_category_list("questions",0)%>
+                    <%foreach(DataRow dr in categoryqs.Rows)%>
+                    <a target="_self" class="" href="<%linkurl("questions_list",dr["id"])%>">{dr[title]}</a>
+                    <%/foreach%>
+                </div>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("feedback")%>">
+                    留言反馈
+                </a>
+            </li>
+            <li class="">
+                <a class="nav_a" target="_self" href="<%linkurl("contact")%>">
+                    联系我们
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="nav_bar">
+        <script type="text/javascript">
+			$.ajax({
+				type: "POST",
+				url: "{config.webpath}tools/submit_ajax.ashx?action=user_check_login",
+				dataType: "json",
+				timeout: 20000,
+				success: function (data, textStatus) {
+					if (data.status == 1) {
+					    $(".nav_bar").prepend('<a href="<%linkurl("usercenter","exit")%>">退出</a><span>|</span>');
+					    $(".nav_bar").prepend('<a href="<%linkurl("usercenter","index")%>"><span class="icon-user">&nbsp;</span>会员中心</a><span>|</span>');
+
+					} else {
+					    $(".nav_bar").prepend('<a href="<%linkurl("register")%>">注册</a><span>|</span>');
+					    $(".nav_bar").prepend('<a  href="<%linkurl("login")%>">登录</a><span>|</span>');
+					}
+				}
+			});
+        </script>
+        <a class="showcar " href="<%linkurl("cart")%>"><span class="icon-shopping-cart">&nbsp;</span>购物车&nbsp;<span>
+            <script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_cart_count"></script>
+            </span>&nbsp;件</a>
+    </div>
+</div>

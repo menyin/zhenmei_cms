@@ -1,0 +1,300 @@
+﻿*
+{
+    padding: 0px;
+    margin: 0px;
+}
+body
+{
+    padding-top: 60px;
+}
+.header
+{
+    width: 100%;
+    height: 55px;
+    position: fixed;
+    top: 0px;
+    filter: alpha(opacity=90); /*设置背景色不透明度，IE兼容*/
+    opacity: 0.9; /*设置背景色不透明度，非IE兼容*/
+    background-color: #448FED;
+    z-index: 100;
+}
+
+.headerC
+{
+    width: 1180px;
+    height: 55px;
+    margin: auto;
+}
+.headerC_Left
+{
+    width: 800px;
+    height: 55px;
+    float: left;
+}
+.header img
+{
+    width: 110px;
+    height: 28px;
+    float: left;
+    margin: 14px;
+}
+.header ul
+{
+    width: 280px;
+    height: 30px;
+    float: left;
+    margin-top: 13px;
+    margin-left: 30px;
+}
+.header ul li
+{
+    width: 50px;
+    height: 30px;
+    float: left;
+    list-style-type: none;
+}
+.header ul li a
+{
+    color: White;
+    display: block;
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    padding-left: 7px;
+}
+.header ul li a:hover
+{
+    background-color: #1553a1;
+}
+.header .search
+{
+    width: 194px;
+    height: 28px;
+    float: left;
+    margin-top: 14px;
+    line-height: 28px;
+    border: 1px solid #76B5DC;
+}
+.header .searchT
+{
+    width: 160px;
+    height: 23px;
+    border: none;
+    color: #FFF;
+    margin-left: 4px;
+    background-color: #448FED;
+}
+.header .searchB
+{
+    width: 20px;
+    height: 23px;
+    border: none;
+    cursor: pointer;
+    background: url(../images/search.png) no-repeat left center;
+}
+
+.headerC_Right
+{
+    width: 250px;
+    height: 55px;
+    float: left;
+    color: White;
+    font-size: 12px;
+}
+.headerC_Right a
+{
+    color: White;
+    line-height: 55px;
+    font-size: 14px;
+}
+.category
+{
+    width: 1180px;
+    height: auto;
+    margin: auto;
+}
+.categoryT
+{
+    width: 100%;
+    height: 35px;
+    margin: auto;
+    font-weight: normal;
+}
+.categoryT h2
+{
+    float: left;
+    color: #888;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 31px;
+    display: inline-block;
+}
+
+.categoryT a
+{
+    color: #888;
+    text-decoration: none;
+}
+.categoryT a:hover
+{
+    cursor:pointer;
+    color: #ff9900;
+}
+.categoryT p
+{
+    float: left;
+    font-size: 12px;
+    line-height: 35px;
+    color: #999;
+    display: inline-block;
+}
+.categoryT p a
+{
+    color: #888;
+    font: 14px;
+}
+
+
+.categoryL
+{
+    width:930px;
+    float:left;
+}
+.categoryL ul li
+{
+    width: 460px;
+    height: 130px;
+    float: left;
+    overflow:hidden;
+    margin: 5px 0px 5px 0px;
+    list-style-type: none;
+}
+.categoryL ul li > a
+{
+    width: 224px;
+    height: 125px;
+    float: left;
+    display: block;
+    overflow: hidden;
+    margin-right: 10px;
+    font-size: 18px;
+}
+.categoryL ul li a
+{
+    color:#666;
+    text-decoration:none;
+}
+.categoryL ul li a:hover
+{
+    color:ff9900;
+    text-decoration:none;
+}
+.categoryL ul li a img
+{
+    width: 100%;
+    height: 100%;
+}
+.categoryL ul li h3 a
+{
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+    float: none;
+    width: 225px;
+    display: inline-block;
+}
+.categoryL ul li h3 a:hover
+{
+        color: #ff9900;
+    cursor:pointer;
+}
+
+.categoryL ul li p
+{
+    margin: 10px auto 4px auto;
+    font-size: 13px;
+    line-height: 20px;
+    height: 40px;
+    overflow: hidden;
+    color: #666;
+}
+.categoryL ul li i
+{
+    font-size: 13px;
+    color: #666;
+}
+.categoryR
+{
+    width:240px;
+    float:right;
+     margin: 0px;
+}
+.categoryR ul
+{
+    width: 100%;
+}
+.categoryR ul li
+{
+    width:240px;
+    font-size: 13px;
+    line-height:26px;
+    margin:20px 0px 8px 0px;
+    width: 90%;
+    margin: 8px auto;
+    list-style-type: none;
+}
+.categoryR ul li i
+{
+    width: 18px;
+    text-align: center;
+    line-height: 18px;
+    height: 100%;
+    display: inline-block;
+    background-color: #448FED;
+    margin-right: 5px;
+}
+
+
+.categoryR ul .currLi i
+{
+    background-color: #ff9900;
+}
+.categoryR ul li span
+{
+    float: right;
+    color: #666;
+}
+.categoryR ul li a
+{
+    color: #666;
+}
+.categoryR ul li a:hover
+{
+    color: #ff9900;
+    cursor:pointer;
+}
+.footer
+{
+    width:100%;
+    height:130px;
+    background-color:#EEF8FA;
+}
+.footer a
+{
+    color:#888;
+    text-decoration:none;
+}
+
+
+.footerC
+{
+    width:1180px;
+    margin:auto;
+    text-align:center;
+}
+.footer p
+{
+    color:#888;
+    line-height:40px;
+}

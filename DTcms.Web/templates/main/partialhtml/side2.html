@@ -1,0 +1,54 @@
+﻿<div class="side">
+    <div class="titlebar">
+        <span class="icon-user"></span>在线客服
+    </div>
+    <div class="qqservice">
+        <!--API http://www.jsqq.cn/-->
+        <%set var qqs=config.qqservice.Split('，')%>
+        <%foreach(string qq in qqs)%>
+        <p>
+            <strong>{qq.Split('：')[0]}：</strong>{qq.Split('：')[1]}&nbsp;&nbsp;
+            <a href="http://wpa.qq.com/msgrd?v=3&uin={qq.Split('：')[1]}&site=qq&menu=yes">
+                <img src="http://www.jsqq.cn/codes/one/images/q_1.gif" border="0" alt="点击咨询" title="点击咨询" />
+            </a>
+        </p>
+        <%/foreach%>
+    </div>
+    <br />
+    <div class="titlebar">
+        <span class="icon-envelope-alt"></span>留言反馈
+    </div>
+    <div class="feedback_way">
+        <a href="<%linkurl("feedback")%>"><img src="<%templateskin%>/images/feedback_icon.png" alt="" /></a>
+    </div>
+    <br />
+    <div class="titlebar">
+        <span class="icon-bookmark"></span>产品展示
+    </div>
+    <div class="product_imgs1 swiper-container">
+        <div class="swiper-wrapper">
+            <%set DataTable goods=get_article_list("news", 0, 8, "status=0 and is_slide=1 and img_url<>''")%>
+            <%foreach(DataRow dr in goods.Rows)%>
+            <div class="swiper-slide"><a href="<%linkurl("goods_show",dr["id"])%>">
+                <img src="{dr[img_url]}" alt="{dr[title]}" style="width: 100%;" /></a></div>
+            <%/foreach%>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="titlebar">
+        <span class="icon-phone-sign"></span>联系我们
+    </div>
+    <div>
+        <img style="width: 100%;"
+             src="<%templateskin%>/images/contact_icon.jpg"
+             alt="">
+    </div>
+    <ul class="contact_ways">
+        <li>手机：{config.webtel}</li>
+        <li>传真：0592-44444448</li>
+        <li>邮箱：{config.webmail}</li>
+        <li>网址：{config.weburl}</li>
+        <li>地址：{config.webaddress}</li>
+    </ul>
+</div>

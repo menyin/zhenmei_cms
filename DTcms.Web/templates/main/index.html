@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{site.seo_title}</title>
+    <meta name="keywords" content="{site.seo_keyword}" />
+    <meta name="description" content="{site.seo_description}" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome-ie7.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/swiper.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/public.css" />
+    <script type="text/javascript" src="<%templateskin%>/js/jquery-1.11.0.min.js"></script>
+
+</head>
+<body>
+    <%template src="partialhtml/header.html"%>
+    <div class="content clear">
+        <%template src="partialhtml/banner.html"%>
+        <div class="wraper clear">
+            <%template src="partialhtml/side2.html"%>
+            <div class="main">
+                <div class="titlebar">
+                    <span class="icon-leaf"></span>公司简介
+                </div>
+                <br />
+                <div class="about_desc clear">
+                    <p>
+                        <%=get_article_colval<string>("about","zhaiyao")%>
+</p>
+                    <a class="more right" href="<%linkurl("about")%>">更多>></a>
+                </div>
+                <br />
+                <ul class="feature clear">
+                    <li class="left">
+                        <div class="titlebar">
+                            <span class="icon-fire"></span>经营有方
+                        </div>
+                        <div class="feature_con">
+                            <h2><%=get_article_colval<string>("concept","title")%></h2>
+                            <p><%=get_article_colval<string>("concept","zhaiyao")%></p>
+                        </div>
+                    </li>
+                    <li class="right">
+                        <div class="titlebar">
+                            <span class="icon-fire"></span>业务广泛
+                        </div>
+                        <div class="feature_con">
+                            <h2><%=get_article_colval<string>("business","title")%></h2>
+                            <p><%=get_article_colval<string>("business","zhaiyao")%></p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="titlebar">
+                    <span class="icon-trophy"></span>精品案例
+                </div>
+               
+                <div class="product_imgs2 swiper-container">
+                    <div class="swiper-wrapper">
+                        <%set DataTable goodsjinpin=get_article_list("news", 0, 9, "status=0 and is_slide=1 and img_url<>''")%>
+                        <%foreach(DataRow dr in goodsjinpin.Rows)%>
+                        <div class="swiper-slide"><a href="<%linkurl("goods_show",dr["id"])%>"><img src="{dr[img_url]}" alt="{dr[title]}" style="height: 100%;" /></a></div>
+                        <%/foreach%>
+                    </div>
+                </div>
+
+                <div class="titlebar">
+                    <span class="icon-list-ul"></span>新闻中心
+                </div>
+                <ul class="news_list">
+                    <%set DataTable focusNews=get_article_list("news", 0, 6, "status=0")%>
+                    <%foreach(DataRow dr in focusNews.Rows)%>
+                    <li>
+                        <a class="left" href="<%linkurl("news_show",dr["id"])%>"><span class="icon-align-left">&nbsp;&nbsp;</span>{dr[title]}</a> <span class="right"><%datetostr({dr[add_time]},yyyy-MM-dd)%></span>
+                    </li>
+                    <%/foreach%>
+                    <a class="more right" href="<%linkurl("news")%>">更多>></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <%template src="partialhtml/footer.html"%>
+</body>
+</html>
+<script type="text/javascript" src="<%templateskin%>/js/swiper.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/public.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //产品展示
+        var swiper1 = new Swiper('.product_imgs1', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            autoplay:3000,
+            loop : true,
+            effect:'fade'
+        });
+        $('.product_imgs1').hover(function () {
+            swiper1.stopAutoplay();
+        }, function () {
+            swiper1.startAutoplay();
+        });
+        //精品案例
+        var swiper2 = new Swiper('.product_imgs2', {
+            paginationClickable: true,
+            freeModeMomentum:true,//不是每格滑动，而是自由滑动
+            slidesPerView: 3,
+            autoplay:0.0001,
+            spaceBetween: 40,
+            loop : true,//循环
+            speed:4000
+        });
+        $('.product_imgs2').hover(function () {
+            swiper2.stopAutoplay();
+        }, function () {
+            swiper2.startAutoplay();
+        });
+
+    });
+</script>

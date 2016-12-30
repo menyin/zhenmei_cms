@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{model.title} - {site.name}</title>
+    <meta name="keywords" content="{model.seo_keywords}" />
+    <meta name="description" content="{model.seo_description}" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome-ie7.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/swiper.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/zTreeStyle.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/public.css" />
+    <script type="text/javascript" src="<%templateskin%>/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%templateskin%>/js/common.js"></script>
+
+</head>
+<body>
+    <%template src="partialhtml/header.html"%>
+    <div class="content clear">
+        <%template src="partialhtml/banner.html"%>
+        <div class="wraper clear">
+            <div class="side">
+                <div class="titlebar">
+                    <span class="icon-user"></span>新闻分类
+                </div>
+                <div>
+                    <ul id="ztree" class="ztree"></ul>
+                </div>
+            </div>
+            <div class="main">
+                <div class="titlebar">
+                    <span class="icon-list-ul"></span>新闻中心<span class="catemenu"><%=get_category_menu("news_list",category_id)%></span>
+                </div>
+                <ul class="news_list clear">
+                    <form class="search" action="#">
+                        <label>热搜新闻：<span>公司新闻</span>|<span>行业新闻</span>|<span>企业新闻</span></label>
+                        <input class="search_txt" id="keywords" type="text" />
+                        <input class="search_bt gradient" value="搜索" type="button"  onclick="SiteSearch('<%linkurl("news_list",category_id,1)%>','#keywords');"/>
+
+                    </form>
+                    <ul class="news_list clear">
+                        <%csharp%>
+                        string[] str=Request.RawUrl.Split('?');
+                        string keyword=str.Count()==2?(str[1].Split('=').Count()==2?str[1].Split('=')[1]:""):"";
+                        DataTable list=null;
+                        if(string.IsNullOrEmpty(keyword)){
+                        //非搜索情况下的列表
+                        list=get_article_list(channel, category_id, pagesize, page, "status=0", out totalcount, out pagelist, "news_list", category_id, "__id__");
+                        }else
+                        {
+                        //搜索情况下的列表
+                        list=get_search_list(channel,9, out totalcount);
+                        }
+                        <%/csharp%>
+                        <%foreach(DataRow dr in list.Rows)%>
+                        <li>
+                            <a class="left" href="<%linkurl("news_show",dr["id"])%>"><span class="icon-align-left">&nbsp;&nbsp;</span>{dr[title]}</a> <span class="right">{dr[add_time]}</span>
+                        </li>
+                        <%/foreach%>
+
+
+                    </ul>
+                    <p class="pagenav">{pagelist}</p>
+
+                </ul></div>
+            </div>
+        </div>
+    </div>
+    <%template src="partialhtml/footer.html"%>
+</body>
+</html>
+<script type="text/javascript" src="<%templateskin%>/js/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/swiper.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/public.js"></script>
+<script type="text/javascript">
+    //设置滚动距离
+    $('body,html').animate({scrollTop:470},10,'swing');
+    $(function () {
+        //新闻分类树
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0
+                }
+            },
+            callback:{
+                onDblClick:function(event, treeId, treeNode) {
+                    var url="<%linkurl("news_list",99999999,1)%>";
+                    document.location.href=url.replace("99999999",treeNode.id);
+
+                }
+            }
+        };
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes =[];
+        //使用标签语法拼接处类别数据
+        <%set DataTable categood=get_category_list("news",0)%>
+        <%foreach(DataRow dr in categood.Rows)%>
+            zNodes.push({ id:{dr[id]},pId:{dr[parent_id]},name:"{dr[title]}"});
+        <%/foreach%>
+
+//        showIcon : true,
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#ztree"), setting, zNodes);
+        });
+    });
+</script>

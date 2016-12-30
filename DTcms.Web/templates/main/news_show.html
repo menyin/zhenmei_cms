@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%set string category_title=get_category_title(model.category_id,"新闻资讯")%>
+    <title>{model.title} - {category_title} - {site.name}</title>
+    <meta content="{model.seo_keywords}" name="keywords" />
+    <meta content="{model.seo_description}" name="description" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/font-awesome-ie7.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/swiper.min.css" />
+    <link rel="stylesheet" href="<%templateskin%>/css/public.css" />
+    <script type="text/javascript" src="<%templateskin%>/js/jquery-1.11.0.min.js"></script>
+
+</head>
+<body>
+    <%template src="partialhtml/header.html"%>
+    <div class="content clear">
+        <%template src="partialhtml/banner.html"%>
+        <div class="wraper clear">
+            <%template src="partialhtml/side1.html"%>
+            <div class="main">
+                <div class="titlebar">
+                    <span class="icon-leaf"></span>新闻浏览</i>
+                </div>
+                <div class="new_show">
+                    <h3 class="new_title">{model.title}</h3>
+                    <p class="new_info">
+                        <span class="icon-calendar"></span><i>{model.add_time}</i>
+                        <span class="icon-eye-open"></span><i>
+                        <script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_article_click&id={model.id}&click=1"></script>人浏览</i>
+                        <i>分类：公司新闻</i>
+                    </p>
+                    <p class="new_con">
+                        {model.content}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%template src="partialhtml/footer.html"%>
+</body>
+</html>
+<script type="text/javascript" src="<%templateskin%>/js/swiper.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/public.js"></script>
